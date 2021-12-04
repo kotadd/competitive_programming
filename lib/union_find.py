@@ -1,47 +1,57 @@
+from collections import defaultdict
+import sys
+input = sys.stdin.buffer.readline
+sys.setrecursionlimit(10 ** 7)
+
+
 class UnionFind:
-    # 作りたい要素数nで初期化
-    # 使用するインスタンス変数の初期化
     def __init__(self, n):
         self.n = n
-        # root[x]<0ならそのノードが根かつその値が木の要素数
-        # rootノードでその木の要素数を記録する
-        self.root = [-1] * (n + 1)
-        # 木をくっつける時にアンバランスにならないように調整する
-        self.rank = [0] * (n + 1)
+        self.root = [-1] * n
 
-    # ノードxのrootノードを見つける
-    def findRoot(self, x):
-        if(self.root[x] < 0):  # 根
-            return x
-        else:
-            # ここで代入しておくことで、後の繰り返しを避ける
-            self.root[x] = self.findRoot(self.root[x])
-            return self.root[x]
-    # 木の併合、入力は併合したい各ノード
+    def find(self, x):
+        stack = []
+        while self.root[x] >= 0:
+            stack.append(x)
+            x = self.root[x]
+        for i in stack:
+            self.root[i] = x
+        return x
+
+    def issame(self, x, y):
+        return self.find(x) == self.find(y)
 
     def unite(self, x, y):
-        # 入力ノードのrootノードを見つける
-        x = self.findRoot(x)
-        y = self.findRoot(y)
-        # すでに同じ木に属していた場合
+        x = self.find(x)
+        y = self.find(y)
         if x == y:
-            return
-        # 違う木に属していた場合rankを見てくっつける方を決める
-        if self.rank[x] > self.rank[y]:
-            self.root[x] += self.root[y]
-            self.root[y] = x
+            return False
+        if self.root[x] > self.root[y]:
+            x, y = y, x
+        self.root[x] += self.root[y]
+        self.root[y] = x
+        return True
 
-        else:
-            self.root[y] += self.root[x]
-            self.root[x] = y
-            # rnkが同じ（深さに差がない場合）は1増やす
-            if self.rank[x] == self.rank[y]:
-                self.rank[y] += 1
-    # xとyが同じグループに属するか判断
+    def size(self, x):
+        return -self.root[self.find(x)]
 
-    def isSameGroup(self, x, y):
-        return self.findRoot(x) == self.findRoot(y)
+    def members(self, x):
+        root = self.find(x)
+        return [i for i in range(self.n) if self.find(i) == root]
 
-    # ノードxが属する木のサイズを返す
-    def count(self, x):
-        return -self.root[self.findRoot(x)]
+    def roots(self):
+        return [i for i, x in enumerate(self.root) if x < 0]
+
+    def group_count(self):
+        return len(self.roots())
+
+    def all_group_members(self):
+        group_members = defaultdict(list)
+        for member in range(self.n):
+            group_members[self.find(member)].append(member)
+        return group_members
+
+    def __str__(self):
+        return '\n'.join(
+            f'{r}: {m}' for r,
+            m in self.all_group_members().items())

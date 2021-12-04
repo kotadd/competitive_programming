@@ -26,18 +26,21 @@ def is_prime(x: int):
     return True
 
 
-# エラトステネスのふるい (sieve)
+# 素数をリストで返す：エラトステネスのふるい Sieve of Eratosthenes  O(NloglogN)
 def list_primes(limit: int):
     primes = []
     is_prime = [True] * (limit + 1)
-    is_prime[0] = False
-    is_prime[1] = False
+    is_prime[0], is_prime[1] = False, False
 
-    for p in range(0, limit + 1):
+    for p in range(2, limit + 1):
         if not is_prime[p]:
             continue
-        primes.append(p)
-        for i in range(p * p, limit + 1, p):
-            is_prime[i] = False
 
+        primes.append(p)
+        q = p * 2
+        while q <= limit:  # for q in range(p * 2, limit + 1, p):
+            is_prime[q] = False
+            q += p
+
+    # is_primeを返せば、True/Falseのリストを渡す
     return primes

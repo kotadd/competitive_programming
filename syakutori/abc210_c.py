@@ -4,7 +4,6 @@ from collections import defaultdict
 
 N, K = map(int, input().split())
 C = list(map(int, input().split()))
-# 初期値を0にしてくれる便利なやつ
 d = defaultdict(int)
 ans = 0
 cnt = 0
