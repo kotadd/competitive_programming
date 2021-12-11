@@ -10,9 +10,8 @@ def make_divisors(n):
         i += 1
     return lower_divisors + upper_divisors[::-1]
 
+
 # 約数列挙をsetで
-
-
 def set_divisors(n):
     d = set()
     m = 2

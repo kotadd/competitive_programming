@@ -7,14 +7,26 @@
 
 N = int(input())
 ans = 0
-B = int(N**0.5)
-for q in range(1, B):
-    a = N // q
-    b = N // (q + 1)
-    ans += (a - b) * q
-for i in range(1, N // B + 1):
-    ans += N // i
+i = 1
+while i <= N:
+    x = N // i
+    ni = N // x + 1
+    ans += x * (ni - i)
+    i = ni
 print(ans)
+
+
+# 動画公式解説
+# 同じ値になるiをまとめて計算する O(√N)
+# N = int(input())
+# ans = 0
+# i = 1
+# while i <= N:
+#     x = N // i # ある値になる
+#     ni = (N // x) + 1 # 一つ上の式でxとiを入れ替えて、次のiにするために+1する
+#     ans += x * (ni - i) # ある値×個数
+#     i = ni
+# print(ans)
 
 
 # 公式？

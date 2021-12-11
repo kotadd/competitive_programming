@@ -1,5 +1,6 @@
 #  B - Many Oranges
 # https://atcoder.jp/contests/abc195/tasks/abc195_b
+# A<=X<=B の範囲で何個取れるか？ -> O(1)で求められるし、もしくは全探索で求めることもできる
 
 A, B, W = map(int, input().split())
 
