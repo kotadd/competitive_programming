@@ -1,10 +1,12 @@
+# D - Neighbors
+# https://atcoder.jp/contests/abc231/tasks/abc231_d
+# Union Find
 from collections import defaultdict
 import sys
 input = sys.stdin.buffer.readline
 sys.setrecursionlimit(10 ** 7)
 
 
-# union-find
 class UnionFind:
     def __init__(self, n):
         self.n = n
@@ -59,13 +61,20 @@ class UnionFind:
 
 
 N, M = map(int, input().split())
-
 uf = UnionFind(N)
+cnt = [0] * N
 for i in range(M):
     a, b = map(int, input().split())
     a -= 1
     b -= 1
+    if uf.issame(a, b):
+        print('No')
+        exit()
     uf.unite(a, b)
+    cnt[a] += 1
+    cnt[b] += 1
 
-
-ans = 0
+if max(cnt) >= 3:
+    print('No')
+else:
+    print('Yes')

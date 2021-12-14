@@ -19,7 +19,7 @@ for i in range(N):
 ans = []
 
 
-# 木のオイラーツアー
+# 木のオイラーツアー：深さ優先探索で通りかかった順番に頂点を記述する方法
 def dfs(cur, pre):
     ans.append(cur + 1)
     for next in G[cur]:
