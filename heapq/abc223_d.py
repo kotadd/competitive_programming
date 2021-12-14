@@ -2,6 +2,7 @@
 # https://atcoder.jp/contests/abc223/tasks/abc223_d
 # いくつかの辺の順序が決まっており、辞書順最小の数列
 # トポロジカルソートの解説：https://qiita.com/drken/items/996d80bcae64649a6580
+# topological sort
 # 小さい順（辞書順）を求められたときは、heapq
 
 # 8 12

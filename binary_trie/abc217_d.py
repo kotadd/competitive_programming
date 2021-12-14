@@ -6,8 +6,6 @@
 # x以上の最小要素の取得
 # x以下の最大要素の取得
 
-# 平衡二分木（BalancingTree, BinaryTrie, 平衡二分探索）
-
 class BinaryTrie:
     def __init__(self, max_query=2 * 10**5, bitlen=30):
         n = max_query * bitlen
