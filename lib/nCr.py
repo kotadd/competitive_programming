@@ -1,4 +1,4 @@
-# nCrの計算（コンビネーション）
+# nCrの計算（コンビネーション） nCm
 from operator import mul
 from functools import reduce
 

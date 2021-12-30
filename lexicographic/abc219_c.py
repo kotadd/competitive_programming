@@ -1,6 +1,8 @@
-# 辞書順の対応表を作成し、名前を入れ替える問題
-# Neo-lexicographic Ordering
+# C - Neo-lexicographic Ordering
 # https://atcoder.jp/contests/abc219/tasks/abc219_c
+# 辞書順の対応表を作成し、名前を入れ替える問題
+# string.ascii_lowercaseの使い方
+# Neo-lexicographic Ordering
 
 import string
 

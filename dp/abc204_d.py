@@ -5,16 +5,22 @@ N = int(input())
 T = list(map(int, input().split()))
 M = 10**5
 INF = 10**9
-# DP[i][t] := i番目まで料理作成が終わっていて、オーブンAの使用時間がtであるときのオーブンBの使用時間の最小値
-DP = [[INF] * (M + 1001) for i in range(N + 1)]
-DP[0][0] = 0
+# dp[i][t] := i番目まで料理作成が終わっていて、オーブンAの使用時間がtであるときのオーブンBの使用時間の最小値
+dp = [[INF] * (M + 1001) for i in range(N + 1)]
+dp[0][0] = 0
 for i in range(N):
     for j in range(M + 1):
-        DP[i + 1][j] = min(DP[i + 1][j], DP[i][j] + T[i])  # オーブンBを使う
-        DP[i + 1][j + T[i]] = min(DP[i + 1][j + T[i]], DP[i][j])  # オーブンAを使う
+        dp[i + 1][j] = min(dp[i + 1][j], dp[i][j] + T[i])  # オーブンBを使う
+        dp[i + 1][j + T[i]] = min(dp[i + 1][j + T[i]], dp[i][j])  # オーブンAを使う
 
 
-ANS = INF
+ans = INF
 for i in range(M + 1):
-    ANS = min(ANS, max(i, DP[N][i]))
-print(ANS)
+    ans = min(ans, max(i, dp[N][i]))
+print(ans)
+
+
+# for i in range(6):
+#     for j in range(26):
+#         print(dp[i][j], end=' ')
+#     print()

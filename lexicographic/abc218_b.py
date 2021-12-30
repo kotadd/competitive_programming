@@ -1,5 +1,6 @@
-# qwerty
+# B - qwerty
 # https://atcoder.jp/contests/abc218/tasks/abc218_b
+# string.ascii_lowercaseを知っているかの問題
 import string
 
 P = list(map(int, input().split()))
