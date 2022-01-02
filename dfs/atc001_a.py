@@ -20,12 +20,12 @@ def dfs(x, y):
     dfs(x, y - 1)
 
 
-for row in range(h):
-    for col in range(w):
-        if maze[row][col] == "s":
-            s = [row, col]
-        elif maze[row][col] == "g":
-            g = [row, col]
+for x in range(h):
+    for y in range(w):
+        if maze[x][y] == "s":
+            s = [x, y]
+        elif maze[x][y] == "g":
+            g = [x, y]
 
 dfs(s[0], s[1])
 if reached[g[0]][g[1]] == 1:

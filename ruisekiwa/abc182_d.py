@@ -14,6 +14,7 @@ for i in range(N):
     M[i + 1] = max(M[i], S[i + 1])
 
 # accumulateを利用することでシンプルに累積和を求められる
+# from itertools import accumulate
 # S = list(accumulate(A))
 # M = list(accumulate(A, func=max))
 

@@ -40,7 +40,7 @@ for i in range(1, 10):
     if cnt[i] < 2:
         continue
     if score(S + str(i)) > score(T + str(i)):
-        ans += cnt[i] * cnt[i] - 1
+        ans += cnt[i] * (cnt[i] - 1)
 
 N = 9 * K - 8
 print(ans / N / (N - 1))

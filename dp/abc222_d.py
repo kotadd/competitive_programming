@@ -1,7 +1,7 @@
 # D - Between Two Arrays
 # https://atcoder.jp/contests/abc222/tasks/abc222_d
 # 動的計画法＋累積和
-# 単調増加
+# 広義単調増加
 
 # 公式回答
 MOD = 998244353

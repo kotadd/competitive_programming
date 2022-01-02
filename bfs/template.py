@@ -7,7 +7,7 @@ N, M = map(int, input().split())
 G = [[] for _ in range(N + 1)]
 
 
-# 深さ優先探索（辺の重みが1のときの最短経路） O(N+M)
+# 幅優先探索（辺の重みが1のときの最短経路） O(N+M)
 def bfs():
     dist = [-1] * N
     q = deque()
