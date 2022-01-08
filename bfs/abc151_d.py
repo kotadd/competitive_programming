@@ -18,13 +18,13 @@ for i in range(H):
         q.append((i, j))
         d = [[INF] * W for _ in range(H)]
         d[i][j] = 0
-        while len(q):
+        while q:
             cur = q.popleft()
             ans = max(ans, d[cur[0]][cur[1]])
-            for k in range(4):
-                dx, dy = cur[0] + dxy[k][0], cur[1] + dxy[k][1]
-                if 0 <= dx < H and 0 <= dy < W and maze[dx][dy] == "." and d[dx][dy] > d[cur[0]][cur[1]] + 1:
-                    d[dx][dy] = d[cur[0]][cur[1]] + 1
-                    q.append((dx, dy))
+            for dx, dy in dxy:
+                x, y = cur[0] + dx, cur[1] + dy
+                if 0 <= x < H and 0 <= y < W and maze[x][y] == "." and d[x][y] == INF:
+                    d[x][y] = d[cur[0]][cur[1]] + 1
+                    q.append((x, y))
 
 print(ans)
