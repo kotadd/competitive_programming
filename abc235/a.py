@@ -1,3 +1,11 @@
-x = input()
+a, b, c = input()
+abc = a + b + c
+bca = b + c + a
+cab = c + a + b
+ans = int(abc) + int(bca) + int(cab)
+print(ans)
 
-print(int(x[0] + x[1] + x[2]) + int(x[1] + x[2] + x[0]) + int(int(x[2] + x[0] + x[1])))
+# 別解
+a, b, c = input()
+s = int(a) + int(b) + int(c)
+print(111 * s)
