@@ -1,8 +1,5 @@
-# D - Shortest Path Queries 2
-# ワーシャルフロイド法（dp[k+1][i][j] = min(dp[k][i][j], dp[k][i][k] + dp[k][k][j])
-
-# 問題
-# 都市 s を出発して都市 t に到着するまでの最短時間を計算してください。ただし、通ってよい都市は s,t および番号が k 以下の都市のみとします。
+# 全点対間最短経路問題：フロイド・ワーシャル法（ワーシャルフロイド法） O(|V|^3)
+# dp[k+1][i][j] = min(dp[k][i][j], dp[k][i][k] + dp[k][k][j]
 
 N, M = map(int, input().split())
 INF = 1 << 60
@@ -19,12 +16,24 @@ for i in range(M):
 for i in range(N):
     dp[i][i] = 0
 
-ans = 0
 # dp遷移（フロイド・ワーシャル法）
 for k in range(N):
     for i in range(N):
         for j in range(N):
             dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j])
+
+exists_negative_cycle = False
+
+for v in range(N):
+    if dp[v][v] < 0:
+        exists_negative_cycle = True
+
+ans = 0
+if exists_negative_cycle:
+    print('負閉路が存在します')
+else:
+    for i in range(N):
+        for j in range(N):
             if dp[i][j] < INF // 2:
                 ans += dp[i][j]
 

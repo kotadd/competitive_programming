@@ -7,6 +7,8 @@
 # x以下の最大要素の取得
 
 # 平衡二分木（BalancingTree, BinaryTrie, 平衡二分探索木）
+# Binary Trieは平衡二分木よりも実装が楽：https://kazuma8128.hatenablog.com/entry/2018/05/06/022654
+
 
 class BinaryTrie:
     def __init__(self, max_query=2 * 10**5, bitlen=30):
