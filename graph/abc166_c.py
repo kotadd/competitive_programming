@@ -1,6 +1,6 @@
 # C Peaks
 # グラフの問題
-#
+
 N, M = map(int, input().split())
 H = list(map(int, input().split()))
 

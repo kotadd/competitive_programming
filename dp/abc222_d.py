@@ -20,7 +20,7 @@ for i in range(N):
         dp[i + 1] += dp[i]
         dp[i + 1] %= MOD
 
-print(dp)
+print(dp[N])
 
 
 # 別解
