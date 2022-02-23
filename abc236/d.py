@@ -1,7 +1,3 @@
-# D - Dance
-# https://atcoder.jp/contests/abc236/tasks/abc236_d
-# pythonはミュータブルな配列を引数に渡すと、再起的に利用する際に意図しない挙動をする。
-
 N = int(input())
 A = [list(map(int, input().split())) for _ in range(N * 2 - 1)]
 

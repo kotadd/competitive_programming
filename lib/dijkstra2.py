@@ -29,15 +29,15 @@ heapq.heappush(que, (dist[s], s))
 
 
 while (que):
-    d, v = heapq.heappop()
+    d, v = heapq.heappop(que)
 
     if d > dist[v]:
         continue
 
-    for e in G[v]:
-        if dist[e[0]] > dist[v] + e[1]:
-            dist[e[0]] = dist[v] + e[1]
-            heapq.heappush(que, (dist[e[0]], e[0]))
+    for b, w in G[v]:
+        if dist[b] > dist[v] + w:
+            dist[b] = dist[v] + w
+            heapq.heappush(que, (dist[b], b))
 
 for v in range(N):
     if dist[v] < INF:
