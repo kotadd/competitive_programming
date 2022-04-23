@@ -12,11 +12,11 @@ A = list(map(int, input().split()))
 d = defaultdict(int)
 
 ans = 0
-s = 0
+cur = 0
 d[0] = 1
 for a in A:
-    s += a
-    ans += d[s - K]
-    d[s] += 1
+    cur += a
+    ans += d[cur - K]
+    d[cur] += 1
 
 print(ans)

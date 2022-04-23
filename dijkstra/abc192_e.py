@@ -3,43 +3,39 @@
 # ダイクストラ法の典型例
 
 import heapq
-from math import ceil
-INF = 1 << 60
-
 
 N, M, X, Y = map(int, input().split())
-G = [[] for _ in range(N)]
 
-for _ in range(M):
+X -= 1
+Y -= 1
+
+G = [[] for _ in range(N)]
+for i in range(M):
     a, b, t, k = map(int, input().split())
     a -= 1
     b -= 1
     G[a].append((b, t, k))
     G[b].append((a, t, k))
 
-X -= 1
-Y -= 1
-
+INF = 1 << 60
 dist = [INF] * N
 dist[X] = 0
 
 que = []
-heapq.heappush(que, (dist[X], X))
-
+heapq.heappush(que, (0, X))
 
 while que:
-    d, u = heapq.heappop(que)
+    d, v = heapq.heappop(que)
 
-    if d > dist[u]:
+    if d > dist[v]:
         continue
 
-    dist[u] = d
-    for b, t, k in G[u]:
-        cur = ceil(d / k) * k + t
-        if dist[b] > cur:
-            heapq.heappush(que, (cur, b))
+    for u, t, k in G[v]:
+        x = 0
+        if dist[v] % k != 0:
+            x = k - (dist[v] % k)
+        if dist[u] > dist[v] + t + x:
+            dist[u] = dist[v] + t + x
+            heapq.heappush(que, (dist[u], u))
 
-if dist[Y] == INF:
-    print(INF)
-else:
-    print(dist[Y])
+print(dist[Y] if dist[Y] != INF else -1)

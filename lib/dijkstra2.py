@@ -34,10 +34,10 @@ while (que):
     if d > dist[v]:
         continue
 
-    for b, w in G[v]:
-        if dist[b] > dist[v] + w:
-            dist[b] = dist[v] + w
-            heapq.heappush(que, (dist[b], b))
+    for u, w in G[v]:
+        if dist[u] > dist[v] + w:
+            dist[u] = dist[v] + w
+            heapq.heappush(que, (dist[u], u))
 
 for v in range(N):
     if dist[v] < INF:
