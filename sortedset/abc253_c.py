@@ -1,7 +1,8 @@
-# https://atcoder.jp/contests/abc241/submissions/29672122
-# C++のstd::set（平衡二分探索木）の代替であり、同じ要素が複数入れられるもの
-
+# C - Max - Min Query
+# https://atcoder.jp/contests/abc253/tasks/abc253_c
 # https://github.com/tatyam-prime/SortedSet/blob/main/SortedMultiset.py
+# クエリで最大と最小の差分を求める
+# 数はdictで管理する必要があるが、min/maxを求められないのでheapqも組み合わせる必要がある => SortedMultiSet
 import math
 from bisect import bisect_left, bisect_right, insort
 from typing import Generic, Iterable, Iterator, TypeVar, Union, List
@@ -155,16 +156,8 @@ for _ in range(Q):
         lst.add(x)
     elif query[0] == 2:
         x, k = query[1:]
-        p = lst.index_right(x)
-        if p < k:
-            print(-1)
-        else:
-            print(lst[p - k])
+        for i in range(k):
+            if lst.discard(x) is False:
+                break
     else:
-        x, k = query[1:]
-        p = lst.index(x)
-        cnt = len(lst) - p
-        if cnt < k:
-            print(-1)
-        else:
-            print(lst[p + k - 1])
+        print(lst[-1] - lst[0])

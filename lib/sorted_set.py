@@ -1,14 +1,14 @@
-# https://atcoder.jp/contests/abc241/submissions/29672122
-# C++のstd::set（平衡二分探索木）の代替であり、同じ要素が複数入れられるもの
+# https://qiita.com/tatyam/items/492c70ac4c955c055602
+# C++のstd::set（平衡二分探索木）の代替
 
-# https://github.com/tatyam-prime/SortedSet/blob/main/SortedMultiset.py
+# https://github.com/tatyam-prime/SortedSet/blob/main/SortedSet.py
 import math
-from bisect import bisect_left, bisect_right, insort
+from bisect import bisect_left, bisect_right
 from typing import Generic, Iterable, Iterator, TypeVar, Union, List
 T = TypeVar('T')
 
 
-class SortedMultiset(Generic[T]):
+class SortedSet(Generic[T]):
     BUCKET_RATIO = 50
     REBUILD_RATIO = 170
 
@@ -21,10 +21,10 @@ class SortedMultiset(Generic[T]):
         self.a = [a[size * i // bucket_size: size * (i + 1) // bucket_size] for i in range(bucket_size)]
 
     def __init__(self, a: Iterable[T] = []) -> None:
-        "Make a new SortedMultiset from iterable. / O(N) if sorted / O(N log N)"
+        "Make a new SortedSet from iterable. / O(N) if sorted and unique / O(N log N)"
         a = list(a)
-        if not all(a[i] <= a[i + 1] for i in range(len(a) - 1)):
-            a = sorted(a)
+        if not all(a[i] < a[i + 1] for i in range(len(a) - 1)):
+            a = sorted(set(a))
         self._build(a)
 
     def __iter__(self) -> Iterator[T]:
@@ -41,7 +41,7 @@ class SortedMultiset(Generic[T]):
         return self.size
 
     def __repr__(self) -> str:
-        return "SortedMultiset" + str(self.a)
+        return "SortedSet" + str(self.a)
 
     def __str__(self) -> str:
         s = str(list(self))
@@ -61,21 +61,21 @@ class SortedMultiset(Generic[T]):
         i = bisect_left(a, x)
         return i != len(a) and a[i] == x
 
-    def count(self, x: T) -> int:
-        "Count the number of x."
-        return self.index_right(x) - self.index(x)
-
-    def add(self, x: T) -> None:
-        "Add an element. / O(√N)"
+    def add(self, x: T) -> bool:
+        "Add an element and return True if added. / O(√N)"
         if self.size == 0:
             self.a = [[x]]
             self.size = 1
-            return
+            return True
         a = self._find_bucket(x)
-        insort(a, x)
+        i = bisect_left(a, x)
+        if i != len(a) and a[i] == x:
+            return False
+        a.insert(i, x)
         self.size += 1
         if len(a) > len(self.a) * self.REBUILD_RATIO:
             self._build()
+        return True
 
     def discard(self, x: T) -> bool:
         "Remove an element and return True if removed. / O(√N)"
@@ -144,27 +144,3 @@ class SortedMultiset(Generic[T]):
                 return ans + bisect_right(a, x)
             ans += len(a)
         return ans
-
-
-lst = SortedMultiset()
-Q = int(input())
-for _ in range(Q):
-    query = list(map(int, input().split()))
-    if query[0] == 1:
-        x = query[1]
-        lst.add(x)
-    elif query[0] == 2:
-        x, k = query[1:]
-        p = lst.index_right(x)
-        if p < k:
-            print(-1)
-        else:
-            print(lst[p - k])
-    else:
-        x, k = query[1:]
-        p = lst.index(x)
-        cnt = len(lst) - p
-        if cnt < k:
-            print(-1)
-        else:
-            print(lst[p + k - 1])
