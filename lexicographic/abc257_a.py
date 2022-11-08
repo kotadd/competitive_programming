@@ -1,5 +1,6 @@
 # A - A to Z String 2
 # https://atcoder.jp/contests/abc257/tasks/abc257_a
+# ordの使い方
 
 import string
 import math
