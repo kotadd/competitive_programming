@@ -4,6 +4,7 @@
 N, S = map(int, input().split())
 A = list(map(int, input().split()))
 
+# dp[i][j]: i番目までの数を使ってjを作れるか
 dp = [[0] * (S + 1) for _ in range(N + 1)]
 dp[0][0] = 1
 
